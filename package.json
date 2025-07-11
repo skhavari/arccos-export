@@ -1,0 +1,22 @@
+{
+    "name": "arccosexport",
+    "version": "0.0.1",
+    "description": "Download all shot data of all rounds played from Arccos",
+    "main": "index.js",
+    "scripts": {
+        "fetch-rounds": "ts-node fetch-rounds.ts",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Sam Khavari",
+    "license": "MIT",
+    "dependencies": {
+        "axios": "^1.10.0",
+        "csv-writer": "^1.6.0",
+        "dotenv": "^17.2.0"
+    },
+    "devDependencies": {
+        "@types/node": "^24.0.13",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.8.3"
+    }
+}
