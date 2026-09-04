@@ -39,14 +39,26 @@ npm install
 
 ### 3. Set up your `.env`
 
-Create a `.env` file in the root:
+Create a `.env` file in the root. The exporter now obtains a **fresh short-lived JWT** from Arccos for each run, so do **not** maintain `ARCCOS_BEARER_TOKEN` manually.
+
+**Preferred: reusable access credentials**
 
 ```env
-ARCCOS_BEARER_TOKEN=your_token_here
 ARCCOS_USER_ID=your_user_id_here
+ARCCOS_ACCESS_KEY=your_access_key_here
+ARCCOS_SECRET=your_secret_here
 ```
 
-> ✅ You can get your bearer token and user ID by inspecting traffic from the Arccos web dashboard using chrome/safari dev tools.
+These credentials are exchanged with `https://authentication.arccosgolf.com/tokens` whenever the exporter runs. Keep `.env` local and out of source control.
+
+**First-time setup: email and password**
+
+```env
+ARCCOS_USERNAME=you@example.com
+ARCCOS_PASSWORD=your_password_here
+```
+
+The exporter creates an access key and obtains a new JWT at the start of every export. It automatically renews the JWT and retries once if Arccos rejects a token with HTTP 401 during a longer export. `ARCCOS_EMAIL` is also accepted as an alias for `ARCCOS_USERNAME`; never commit either form of credential.
 
 ### 4. Run the fetcher
 
@@ -79,7 +91,7 @@ Each detailed file includes full hole and shot breakdowns, with coordinates, tim
 
 -   Node.js 18+
 -   Arccos account with active data
--   A valid bearer token & user ID
+-   An Arccos username/password, or a saved user ID/access key/secret
 
 ---
 
