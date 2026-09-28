@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "fetch-rounds": "ts-node fetch-rounds.ts",
-        "test": "TS_NODE_COMPILER_OPTIONS='{\"module\":\"CommonJS\"}' node -r ts-node/register tests/arccos_auth.test.ts && tsc --noEmit"
+        "test": "ts-node tests/arccos_auth.test.ts && tsc --noEmit"
     },
     "author": "Sam Khavari",
     "license": "MIT",

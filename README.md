@@ -39,17 +39,7 @@ npm install
 
 ### 3. Set up your `.env`
 
-Create a `.env` file in the root. The exporter now obtains a **fresh short-lived JWT** from Arccos for each run, so do **not** maintain `ARCCOS_BEARER_TOKEN` manually.
-
-**Preferred: reusable access credentials**
-
-```env
-ARCCOS_USER_ID=your_user_id_here
-ARCCOS_ACCESS_KEY=your_access_key_here
-ARCCOS_SECRET=your_secret_here
-```
-
-These credentials are exchanged with `https://authentication.arccosgolf.com/tokens` whenever the exporter runs. Keep `.env` local and out of source control.
+Create a `.env` file in the root. The exporter obtains a **fresh short-lived JWT** from Arccos for each run, so there's no bearer token to copy by hand.
 
 **First-time setup: email and password**
 
@@ -58,7 +48,19 @@ ARCCOS_USERNAME=you@example.com
 ARCCOS_PASSWORD=your_password_here
 ```
 
-The exporter creates an access key and obtains a new JWT at the start of every export. It automatically renews the JWT and retries once if Arccos rejects a token with HTTP 401 during a longer export. `ARCCOS_EMAIL` is also accepted as an alias for `ARCCOS_USERNAME`; never commit either form of credential.
+On a password login the exporter asks Arccos for a new access key and prints it as `ARCCOS_USER_ID`, `ARCCOS_ACCESS_KEY` and `ARCCOS_SECRET` lines. `ARCCOS_EMAIL` is also accepted as an alias for `ARCCOS_USERNAME`.
+
+**Preferred: reusable access credentials**
+
+Paste the printed lines into `.env` (and remove the password) so later runs reuse that key instead of creating a new one:
+
+```env
+ARCCOS_USER_ID=your_user_id_here
+ARCCOS_ACCESS_KEY=your_access_key_here
+ARCCOS_SECRET=your_secret_here
+```
+
+These are exchanged with `https://authentication.arccosgolf.com/tokens` for a new JWT whenever the exporter runs. If Arccos rejects a token with HTTP 401 during a long export, the exporter renews it and retries once. Keep `.env` local and never commit it.
 
 ### 4. Run the fetcher
 
