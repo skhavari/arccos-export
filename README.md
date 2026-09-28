@@ -101,6 +101,8 @@ Each detailed file includes full hole and shot breakdowns, with coordinates, tim
 
 Built by [@skhavari](https://github.com/skhavari) to help players get better faster—one shot at a time.
 
+Thanks to [@mikeypotter](https://github.com/mikeypotter) for adding email/password and access-key login with automatic token refresh ([#1](https://github.com/skhavari/arccos-export/pull/1)), so there's no more copying bearer tokens out of dev tools.
+
 ---
 
 ## 📃 License
