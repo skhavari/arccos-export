@@ -3,20 +3,21 @@
     "version": "0.0.1",
     "description": "Download all shot data of all rounds played from Arccos",
     "main": "index.js",
+    "type": "module",
     "scripts": {
-        "fetch-rounds": "ts-node fetch-rounds.ts",
-        "test": "ts-node tests/arccos_auth.test.ts && tsc --noEmit"
+        "fetch-rounds": "node fetch-rounds.ts",
+        "test": "node --test tests/*.test.ts && tsc"
     },
     "author": "Sam Khavari",
     "license": "MIT",
     "dependencies": {
-        "axios": "^1.10.0",
-        "csv-writer": "^1.6.0",
-        "dotenv": "^17.2.0"
+        "dotenv": "^18.0.4"
     },
     "devDependencies": {
-        "@types/node": "^24.0.13",
-        "ts-node": "^10.9.2",
-        "typescript": "^5.8.3"
+        "@types/node": "^26.6.3",
+        "typescript": "^7.0.2"
+    },
+    "engines": {
+        "node": ">=22.18"
     }
 }
