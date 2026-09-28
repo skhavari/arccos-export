@@ -2,7 +2,7 @@
 
 Fetch and save detailed round data from the Arccos Golf API for advanced analysis, stats modeling, and game improvement tracking.
 
-![Node.js](https://img.shields.io/badge/Node.js-18%2B-green)
+![Node.js](https://img.shields.io/badge/Node.js-22.18%2B-green)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue)
 ![Arccos](https://img.shields.io/badge/Arccos-API-green)
 ![Status](https://img.shields.io/badge/status-active-brightgreen)
@@ -39,28 +39,14 @@ npm install
 
 ### 3. Set up your `.env`
 
-Create a `.env` file in the root. The exporter obtains a **fresh short-lived JWT** from Arccos for each run, so there's no bearer token to copy by hand.
-
-**First-time setup: email and password**
+Create a `.env` file in the root with your Arccos sign-in:
 
 ```env
 ARCCOS_USERNAME=you@example.com
 ARCCOS_PASSWORD=your_password_here
 ```
 
-On a password login the exporter asks Arccos for a new access key and prints it as `ARCCOS_USER_ID`, `ARCCOS_ACCESS_KEY` and `ARCCOS_SECRET` lines. `ARCCOS_EMAIL` is also accepted as an alias for `ARCCOS_USERNAME`.
-
-**Preferred: reusable access credentials**
-
-Paste the printed lines into `.env` (and remove the password) so later runs reuse that key instead of creating a new one:
-
-```env
-ARCCOS_USER_ID=your_user_id_here
-ARCCOS_ACCESS_KEY=your_access_key_here
-ARCCOS_SECRET=your_secret_here
-```
-
-These are exchanged with `https://authentication.arccosgolf.com/tokens` for a new JWT whenever the exporter runs. If Arccos rejects a token with HTTP 401 during a long export, the exporter renews it and retries once. Keep `.env` local and never commit it.
+The first run signs in and saves the resulting Arccos access key and short-lived token to `.arccos-session.json`, so later runs skip signing in. Expired tokens are renewed automatically. Both files are git-ignored; delete `.arccos-session.json` to force a fresh sign-in.
 
 ### 4. Run the fetcher
 
@@ -91,9 +77,9 @@ Each detailed file includes full hole and shot breakdowns, with coordinates, tim
 
 ## 🛠️ Requirements
 
--   Node.js 18+
+-   Node.js 22.18+ (runs the TypeScript directly, no build step)
 -   Arccos account with active data
--   An Arccos username/password, or a saved user ID/access key/secret
+-   Your Arccos username and password
 
 ---
 
@@ -101,7 +87,7 @@ Each detailed file includes full hole and shot breakdowns, with coordinates, tim
 
 Built by [@skhavari](https://github.com/skhavari) to help players get better faster—one shot at a time.
 
-Thanks to [@mikeypotter](https://github.com/mikeypotter) for adding email/password and access-key login with automatic token refresh ([#1](https://github.com/skhavari/arccos-export/pull/1)), so there's no more copying bearer tokens out of dev tools.
+Thanks to [@mikeypotter](https://github.com/mikeypotter) for adding email/password login with automatic token refresh ([#1](https://github.com/skhavari/arccos-export/pull/1)), so there's no more copying bearer tokens out of dev tools.
 
 ---
 
